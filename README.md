@@ -42,3 +42,6 @@ To run the servers locally, please refer to the following resources:
 
 ## Screenshot
 ![Screenshot](screenshot.png)
+
+## License
+MIT
