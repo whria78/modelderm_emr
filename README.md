@@ -33,8 +33,10 @@ Please modify the following parts of the `config.json` generated after running `
 The servers are currently publicly accessible but will be closed in the future.  
 To run the servers locally, please refer to the following resources:
 
-- [Whisper - https://github.com/whria78/modelderm_emr/tree/main/server](https://github.com/whria78/modelderm_emr/tree/main/server)  
-- [llama-server - https://github.com/ggml-org/llama.cpp](https://github.com/ggml-org/llama.cpp)  
+- [Whisper server - https://github.com/whria78/modelderm_emr/tree/main/server](https://github.com/whria78/modelderm_emr/tree/main/server)  
+- [llama-server.exe - https://github.com/ggml-org/llama.cpp](https://github.com/ggml-org/llama.cpp)  
+- [120b - https://huggingface.co/ggml-org/gpt-oss-120b-GGUF](https://huggingface.co/ggml-org/gpt-oss-120b-GGUF)
+- [20b - https://github.com/ggml-org/llama.cpp](https://huggingface.co/ggml-org/gpt-oss-20b-GGUF)
 
 ## Screenshot
 ![Screenshot](screenshot.png)
