@@ -29,6 +29,27 @@ Please modify the following parts of the `config.json` generated after running `
 "Escucha la grabación de la consulta dermatológica y crea un registro médico. Intenta mantener las frases breves y de respuesta única. Por ejemplo: '3MA picazón leve en la espalda', 'erupción generalizada de duración desconocida', 'r/o herpes zóster', 'medicación de otro hospital', 'volver en 3 días'. Si el paciente presenta varios problemas, sepáralos por cada problema y solo registra los hechos mencionados en la conversación. :"
 ```
 
+# Default Configuration
+
+The script uses the following default configuration parameters:
+
+- **SAMPLE_RATE**: Audio sample rate (Hz). Default is 16,000.
+- **CHANNELS**: Number of audio channels. `1` means mono recording.
+- **BLOCK_SEC**: Audio block size in seconds for processing (0.1 sec).
+- **CHUNK_SEC**: Maximum chunk length (30 sec).
+- **CHUNK_RESET_SEC**: Time in seconds before resetting chunks (10 sec).
+- **LOUD_RMS_THRESHOLD**: Minimum RMS level to detect speech activity (0.02).
+- **LOUD_REQUIRED_SEC**: Minimum speech duration required to trigger processing (5.0 sec).
+- **RMS_SMOOTHING**: Smoothing factor for RMS calculation (0.9).
+- **FFMPEG_PATH**: Path to the `ffmpeg` executable.
+- **WHISPER_SERVER_URL**: Endpoint for Whisper transcription server.
+- **SPEECH_SERVER_URL**: Endpoint for speech-to-text summary server (20B model).
+- **SPEECH_SERVER2_URL**: Endpoint for speech-to-text summary server (120B model).
+- **LANG**: Language setting (None = auto-detect).
+- **PROMPT**: Prompt used for very short, 1–4 line charting summaries (Korean medical context).
+- **PROMPT2**: Prompt used for slightly more detailed medical charting, with separate notes per issue.
+
+
 ## ⚠ Server Availability
 
 The servers are currently publicly accessible until 2025-9-30, and will be closed.  
