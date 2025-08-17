@@ -29,9 +29,7 @@ Please modify the following parts of the `config.json` generated after running `
 "Escucha la grabación de la consulta dermatológica y crea un registro médico. Intenta mantener las frases breves y de respuesta única. Por ejemplo: '3MA picazón leve en la espalda', 'erupción generalizada de duración desconocida', 'r/o herpes zóster', 'medicación de otro hospital', 'volver en 3 días'. Si el paciente presenta varios problemas, sepáralos por cada problema y solo registra los hechos mencionados en la conversación. :"
 ```
 
-# Default Configuration
-
-The script uses the following default configuration parameters:
+The script uses the following default configuration `config.json` parameters:
 
 - **CHUNK_SEC**: Maximum chunk length (30 sec).
 - **CHUNK_RESET_SEC**: Time in seconds before resetting chunks (10 sec).
