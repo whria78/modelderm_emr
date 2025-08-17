@@ -6,7 +6,6 @@ def restart_script():
     python_exe = sys.executable
     script = sys.argv[0]
     args = sys.argv[1:]
-    # 새 프로세스로 재실행
     subprocess.Popen([python_exe, script] + args)
     sys.exit(0)
 
@@ -15,28 +14,33 @@ def install_and_restart_if_needed(package, import_name=None):
     try:
         __import__(import_name)
     except ImportError:
-        print(f"[설치 중] {package} ...")
+        print(f"[Install] {package} ...")
         subprocess.check_call([sys.executable, "-m", "pip", "install", package])
         restart_script()
 
-
-# 필수 패키지 리스트
+# 필수 패키지 리스트 (win32gui는 별도로 처리)
 packages = [
     ("numpy", None),
     ("sounddevice", None),
     ("pyperclip", None),
     ("requests", None),
     ("pydub", None),
-    #("pywin32", None),
     ("pyautogui", None)
 ]
 
 for pkg, name in packages:
     install_and_restart_if_needed(pkg, name)
 
+# ---------------- pywin32(win32gui) 체크 ----------------
+try:
+    import win32gui
+except ImportError:
+    print("[NOTICE] pywin32(win32gui) is not installed. - pip install pywin32")
+    print("[Install] pywin32 ...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "pywin32"])
+    restart_script()
 
-import win32gui
-
+    
 def list_all_windows():
     def enum_handler(hwnd, result):
         if win32gui.IsWindowVisible(hwnd):
@@ -131,7 +135,7 @@ default_config = {
     "WHISPER_SERVER_URL": "https://t1.modelderm.com/whisper",
     "SPEECH_SERVER_URL": "https://t1.modelderm.com/20b",
     "SPEECH_SERVER2_URL": "https://t1.modelderm.com/120b",
-    "LANG": "ko",
+    "LANG": None,
     "PROMPT": 
     "진료 녹음을 듣고 차팅용으로 1~4줄, 단답식, 매우 짧게 요약. 예를 들면 '3MA 허리의 약한 가려움증','기간을 모르는 전신의 발진', 'r/o 대상포진','타병원에서 약복용', '3일후 다시 내원 필요' 같은 식으로 요약해줘. :"
     ,
