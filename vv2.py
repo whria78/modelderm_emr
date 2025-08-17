@@ -217,11 +217,6 @@ def calc_loud_seconds(blocks, threshold_rms):
             total += len(b) / SAMPLE_RATE
     return total
 
-def format_timestamp(seconds: float) -> str:
-    m = int(seconds // 60)
-    s = int(seconds % 60)
-    return f"{m:02d}:{s:02d}"
-
 
 # ---------------- 서버 통신 ----------------
 
@@ -289,7 +284,6 @@ def send_to_whisper_server(wav_path, lang=LANG):
             response.raise_for_status()
             data = response.json()
             transcript = data.get('transcript') or data.get('text') or ''
-            print(transcript)
         
         elapsed = time.time() - start_time
         print(f"[Whisper server processing time] {elapsed:.2f}초")
@@ -353,7 +347,7 @@ def process_chunk(data_blocks):
 
     transcript = send_to_whisper_server(wav_path)
     if transcript:
-        transcript_all += '\n' + transcript
+        transcript_all += transcript
         summary = send_to_speech_server(transcript)
         if summary:
             summaries.appendleft(summary)
@@ -534,7 +528,10 @@ def update_window_title():
     else:
         elapsed = time.time() - chunk_start_time
         remaining = max(0, int(CHUNK_SEC - elapsed))
-        root.title(f"🎙 {volume_rms:.3f} | {remaining} secs")
+        if volume_rms>LOUD_RMS_THRESHOLD:
+            root.title(f"{volume_rms:.3f} | {remaining} secs 🎙")
+        else:
+            root.title(f"{volume_rms:.3f} | {remaining} secs")
     root.after(500, update_window_title)
 
 def on_copy(text):
