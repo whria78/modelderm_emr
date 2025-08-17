@@ -69,7 +69,6 @@ from collections import deque
 from threading import Lock
 
 import tempfile
-from pydub import AudioSegment, utils
 
 import win32gui
 import pyautogui
@@ -168,6 +167,9 @@ FFMPEG_PATH_EXIST=False
 if os.path.exists(FFMPEG_PATH): FFMPEG_PATH_EXIST=True
 AudioSegment.converter = None  # ffmpeg 없으면 None
 if FFMPEG_PATH_EXIST: AudioSegment.converter = FFMPEG_PATH
+
+if FFMPEG_PATH_EXIST:
+    from pydub import AudioSegment, utils
 
 # ---------------- 전역 상태 ----------------
 frames = []
@@ -506,7 +508,7 @@ def save_window_position():
 root = tk.Tk()
 root.title("recode & summarize")
 root.attributes("-topmost", True)
-root.resizable(False, False)
+#root.resizable(False, False)
 root.attributes('-toolwindow', True)  # 윈도우 상단 버튼에서 최소/최대 제거
 
 last_geometry = load_window_position()
