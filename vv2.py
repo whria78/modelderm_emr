@@ -511,10 +511,10 @@ root.attributes("-topmost", True)
 #root.resizable(False, False)
 root.attributes('-toolwindow', True)  # 윈도우 상단 버튼에서 최소/최대 제거
 
+root.geometry("250x250")
 last_geometry = load_window_position()
 if last_geometry:
     root.geometry(last_geometry)
-root.geometry("250x180")
 
 summary_frame = tk.Frame(root)
 summary_frame.pack(fill="both", expand=True, padx=10, pady=6)
