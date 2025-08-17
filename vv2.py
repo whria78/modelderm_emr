@@ -27,7 +27,7 @@ packages = [
     ("pyperclip", None),
     ("requests", None),
     ("pydub", None),
-    ("pywin32", None),
+    #("pywin32", None),
     ("pyautogui", None)
 ]
 
@@ -289,6 +289,7 @@ def send_to_whisper_server(wav_path, lang=LANG):
             response.raise_for_status()
             data = response.json()
             transcript = data.get('transcript') or data.get('text') or ''
+            print(transcript)
         
         elapsed = time.time() - start_time
         print(f"[Whisper server processing time] {elapsed:.2f}초")
