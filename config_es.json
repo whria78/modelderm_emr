@@ -1,0 +1,20 @@
+{
+    "SAMPLE_RATE": 16000,
+    "CHANNELS": 1,
+    "BLOCK_SEC": 0.1,
+    "CHUNK_SEC": 30,
+    "CHUNK_RESET_SEC": 10,
+    "LOUD_RMS_THRESHOLD": 0.02,
+    "LOUD_REQUIRED_SEC": 5.0,
+    "RMS_SMOOTHING": 0.9,
+    "FFMPEG_PATH": "c:\\ffmpeg\\bin\\ffmpeg.exe",
+    "WHISPER_SERVER_URL": "https://t1.modelderm.com/whisper",
+    "SPEECH_SERVER_URL": "https://t1.modelderm.com/20b",
+    "SPEECH_SERVER2_URL": "https://t1.modelderm.com/120b",
+    "LANG": "es",
+    "PROMPT": 
+    "Escucha la grabación de la consulta dermatológica y resume en 1-4 líneas cortas para fines de registro. Usa un estilo muy breve y de respuesta única. Por ejemplo: '3MA picazón leve en la espalda', 'erupción generalizada de duración desconocida', 'r/o herpes zóster', 'medicación de otro hospital', 'volver en 3 días'. :"
+    ,
+    "PROMPT2": 
+    "Escucha la grabación de la consulta dermatológica y crea un registro médico. Intenta mantener las frases breves y de respuesta única. Por ejemplo: '3MA picazón leve en la espalda', 'erupción generalizada de duración desconocida', 'r/o herpes zóster', 'medicación de otro hospital', 'volver en 3 días'. Si el paciente presenta varios problemas, sepáralos por cada problema y solo registra los hechos mencionados en la conversación. :"
+}

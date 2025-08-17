@@ -1,0 +1,20 @@
+{
+    "SAMPLE_RATE": 16000,
+    "CHANNELS": 1,
+    "BLOCK_SEC": 0.1,
+    "CHUNK_SEC": 30,
+    "CHUNK_RESET_SEC": 10,
+    "LOUD_RMS_THRESHOLD": 0.02,
+    "LOUD_REQUIRED_SEC": 5.0,
+    "RMS_SMOOTHING": 0.9,
+    "FFMPEG_PATH": "c:\\ffmpeg\\bin\\ffmpeg.exe",
+    "WHISPER_SERVER_URL": "https://t1.modelderm.com/whisper",
+    "SPEECH_SERVER_URL": "https://t1.modelderm.com/20b",
+    "SPEECH_SERVER2_URL": "https://t1.modelderm.com/120b",
+    "LANG": "en",
+    "PROMPT": 
+    "Listen to the dermatology consultation recording and summarize it in 1-4 short lines for charting purposes. Use very brief, single-answer style. For example: '3MA mild itch on back', 'widespread rash of unknown duration', 'r/o shingles', 'medication from another hospital', 'return in 3 days'. :"
+    ,
+    "PROMPT2": 
+    "Listen to the dermatology consultation recording and create a medical chart. Try to keep sentences brief and in single-answer style. For example: '3MA mild itch on back', 'widespread rash of unknown duration', 'r/o shingles', 'medication from another hospital', 'return in 3 days'. If the patient presents with multiple issues, separate them by issue and only record facts mentioned in the conversation. :"
+}

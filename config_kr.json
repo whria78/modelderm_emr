@@ -1,0 +1,18 @@
+{
+    "SAMPLE_RATE": 16000,
+    "CHANNELS": 1,
+    "BLOCK_SEC": 0.1,
+    "CHUNK_SEC": 30,
+    "CHUNK_RESET_SEC": 10,
+    "LOUD_RMS_THRESHOLD": 0.02,
+    "LOUD_REQUIRED_SEC": 5.0,
+    "RMS_SMOOTHING": 0.9,
+    "FFMPEG_PATH": "c:\\ffmpeg\\bin\\ffmpeg.exe",
+    "WHISPER_SERVER_URL": "https://t1.modelderm.com/whisper",
+    "SPEECH_SERVER_URL": "https://t1.modelderm.com/20b",
+    "SPEECH_SERVER2_URL": "https://t1.modelderm.com/120b",
+    "LANG": "ko",
+    "PROMPT": "진료 녹음을 듣고 차팅용으로 1~4줄, 단답식, 매우 짧게 요약. 예를 들면 '3MA 허리의 약한 가려움증','기간을 모르는 전신의 발진', 'r/o 대상포진','타병원에서 약복용', '3일후 다시 내원 필요' 같은 식으로 요약해줘. :"
+    ,
+    "PROMPT2": "진료 녹음을 듣고 의료 차팅을 해줘. 되도록이면 짧게 단답식으로 문장을 구성해줘. 예를 들면 '3MA 허리의 약한 가려움증','기간을 모르는 전신의 발진', 'r/o 대상포진','타병원에서 약복용', '3일후 다시 내원 필요' 같은 식으로 차팅해줘. 여러가지 문제로 내원하였다면 각각의 문제별로 나눠서 기술하고 대화에 있는 사실만 기록해줘. :"
+}
