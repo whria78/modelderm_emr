@@ -25,6 +25,24 @@ packages = [
 
 for pkg, name in packages:
     install_and_import(pkg, name)
+
+
+import win32gui
+
+def list_all_windows():
+    def enum_handler(hwnd, result):
+        if win32gui.IsWindowVisible(hwnd):
+            title = win32gui.GetWindowText(hwnd)
+            if title:  # 빈 문자열 제외
+                result.append((hwnd, title))
+    windows = []
+    win32gui.EnumWindows(enum_handler, windows)
+    return windows
+
+# 실행 시 모든 윈도우 출력
+for hwnd, title in list_all_windows():
+    print(f"HWND: {hwnd}, Title: {title}")
+
     
 import os
 import json
