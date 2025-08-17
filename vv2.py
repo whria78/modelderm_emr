@@ -1,25 +1,34 @@
 import subprocess
 import sys
 
-# ---------------- 자동 라이브러리 설치 ----------------
-def install_and_import(package, import_name=None):
+def restart_script():
+    print("[알림] 필수 패키지 설치 후 스크립트를 재실행합니다...")
+    python_exe = sys.executable
+    script = sys.argv[0]
+    args = sys.argv[1:]
+    # 새 프로세스로 재실행
+    subprocess.Popen([python_exe, script] + args)
+    sys.exit(0)
+
+def install_and_restart_if_needed(package, import_name=None):
     import_name = import_name or package
     try:
         __import__(import_name)
     except ImportError:
         print(f"[설치 중] {package} ...")
         subprocess.check_call([sys.executable, "-m", "pip", "install", package])
-    finally:
-        globals()[import_name] = __import__(import_name)
+        restart_script()
+
 
 # 필수 패키지 리스트
 packages = [
     ("numpy", None),
-    ("sounddevice", "sd"),
+    ("sd", None),
+    ("sounddevice", None),
     ("pyperclip", None),
     ("requests", None),
     ("webrtcvad", None),
-    ("pywin32", "win32gui"),
+    ("pywin32", None),
     ("pyautogui", None)
 ]
 
