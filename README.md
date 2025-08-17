@@ -45,3 +45,5 @@ To run the servers locally, please refer to the following resources:
 
 ## License
 MIT
+
+All powered by Seung Seog Han
