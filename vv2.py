@@ -23,7 +23,6 @@ def install_and_restart_if_needed(package, import_name=None):
 # 필수 패키지 리스트
 packages = [
     ("numpy", None),
-    ("sd", None),
     ("sounddevice", None),
     ("pyperclip", None),
     ("requests", None),
