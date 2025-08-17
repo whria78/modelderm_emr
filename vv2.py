@@ -164,11 +164,10 @@ PROMPT = config.get("PROMPT", default_config["PROMPT"])
 PROMPT2 = config.get("PROMPT2", default_config["PROMPT2"])
 LANG = config.get("LANG", default_config["LANG"])
 
-
-if os.path.exists(FFMPEG_PATH):
-    AudioSegment.converter = FFMPEG_PATH
-else:
-    AudioSegment.converter = None  # ffmpeg 없으면 None
+FFMPEG_PATH_EXIST=False
+if os.path.exists(FFMPEG_PATH): FFMPEG_PATH_EXIST=True
+AudioSegment.converter = None  # ffmpeg 없으면 None
+if FFMPEG_PATH_EXIST: AudioSegment.converter = FFMPEG_PATH
 
 # ---------------- 전역 상태 ----------------
 frames = []
@@ -196,6 +195,7 @@ def save_wav(filename, data_blocks, sample_rate):
         wf.writeframes((np.clip(data_np, -1.0, 1.0) * 32767).astype(np.int16).tobytes())
 
 def convert_wav_to_mp3(wav_path):
+    if FFMPEG_PATH_EXIST==False:return None
     mp3_path = os.path.splitext(wav_path)[0] + ".mp3"
     try:
         subprocess.run(
@@ -242,7 +242,7 @@ def vad_trim(wav_path, threshold_db=-40, min_speech_ms=300):
     """
     # ffmpeg 없으면 trim 없이 반환
     if AudioSegment.converter is None:
-        print("[VAD] ffmpeg 경로가 없어 trim하지 않고 원본 반환")
+        #print("[VAD] ffmpeg 경로가 없어 trim하지 않고 원본 반환")
         return wav_path
 
     audio = AudioSegment.from_wav(wav_path)
