@@ -1,10 +1,10 @@
 ## Requirements && Usage
 
 - **Python 3.12** (install from Windows Store)
-- Optional: **FFmpeg** (for audio trimming)
 
 ```bash
 python vv2.py
+# python 3.12 (NOT 3.13)
 # Install requirements manually if an error occurs as followings:
 # pip install numpy sounddevice pyperclip requests pydub pyautogui pywin32
 ```
@@ -36,7 +36,7 @@ The script uses the following default configuration `config.json` parameters:
 - **LOUD_RMS_THRESHOLD**: Minimum RMS level to detect speech activity (0.02).
 - **LOUD_REQUIRED_SEC**: Minimum speech duration required to trigger processing (5.0 sec).
 - **RMS_SMOOTHING**: Smoothing factor for RMS calculation (0.9).
-- **FFMPEG_PATH**: Path to the `ffmpeg` executable. 
+- **FFMPEG_PATH**: Path to the `ffmpeg` executable. Optional for audio trimming
 - **WHISPER_SERVER_URL**: Endpoint for Whisper transcription server.
 - **LANG**: Language setting (None = auto-detect).
 - **SPEECH_SERVER_URL**: Endpoint for speech-to-text summary server (20B model).
