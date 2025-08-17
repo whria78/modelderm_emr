@@ -41,7 +41,7 @@ To run the servers locally, please refer to the following resources:
 - [gpt-oss 20b - https://huggingface.co/ggml-org/gpt-oss-20b-GGUF](https://huggingface.co/ggml-org/gpt-oss-20b-GGUF)
 
 ## Screenshot
-![Screenshot](screenshot.png)
+![Screenshot](screenshots/Screenshot%202025-08-17%20110436.png)
 
 ## License
 MIT
