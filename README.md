@@ -1,5 +1,3 @@
-![Screenshot](screenshot.png)
-
 ## Requirements
 
 - **Python 3.12** (install from Windows Store)
@@ -9,3 +7,5 @@
 
 ```bash
 python vv2.py
+
+![Screenshot](screenshot.png)
