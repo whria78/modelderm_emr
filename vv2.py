@@ -124,7 +124,7 @@ default_config = {
     "BLOCK_SEC": 0.1,
     "CHUNK_SEC": 30,
     "CHUNK_RESET_SEC": 10,
-    "LOUD_RMS_THRESHOLD": 0.01,
+    "LOUD_RMS_THRESHOLD": 0.02,
     "LOUD_REQUIRED_SEC": 5.0,
     "RMS_SMOOTHING": 0.9,
     "FFMPEG_PATH": "c:\\ffmpeg\\bin\\ffmpeg.exe",
@@ -160,7 +160,6 @@ LOUD_RMS_THRESHOLD = config.get("LOUD_RMS_THRESHOLD", default_config["LOUD_RMS_T
 LOUD_REQUIRED_SEC = config.get("LOUD_REQUIRED_SEC", default_config["LOUD_REQUIRED_SEC"])
 RMS_SMOOTHING = config.get("RMS_SMOOTHING", default_config["RMS_SMOOTHING"])
 
-FFMPEG_PATH = config.get("FFMPEG_PATH", default_config["FFMPEG_PATH"])
 WHISPER_SERVER_URL = config.get("WHISPER_SERVER_URL", default_config["WHISPER_SERVER_URL"])
 SPEECH_SERVER_URL = config.get("SPEECH_SERVER_URL", default_config["SPEECH_SERVER_URL"])
 SPEECH_SERVER2_URL = config.get("SPEECH_SERVER2_URL", default_config["SPEECH_SERVER2_URL"])
@@ -168,12 +167,29 @@ PROMPT = config.get("PROMPT", default_config["PROMPT"])
 PROMPT2 = config.get("PROMPT2", default_config["PROMPT2"])
 LANG = config.get("LANG", default_config["LANG"])
 
-FFMPEG_PATH_EXIST=False
-AudioSegment.converter = None
-if os.path.exists(FFMPEG_PATH): 
-    FFMPEG_PATH_EXIST=True
-    AudioSegment.converter = FFMPEG_PATH
+# 1. 환경 변수에서 ffmpeg 경로 읽기
+env_ffmpeg = os.environ.get("FFMPEG_PATH", None)
 
+# 2. config에서 기본값 가져오기
+FFMPEG_PATH = config.get("FFMPEG_PATH", default_config["FFMPEG_PATH"])
+FFMPEG_PATH_EXIST = False
+AudioSegment.converter = None
+
+# 3. 환경 변수 우선 적용
+if env_ffmpeg and os.path.exists(env_ffmpeg):
+    FFMPEG_PATH = env_ffmpeg
+
+# 4. 실제 파일 존재 여부 확인
+if os.path.exists(FFMPEG_PATH):
+    FFMPEG_PATH_EXIST = True
+    AudioSegment.converter = FFMPEG_PATH
+    # config 업데이트
+    config["FFMPEG_PATH"] = FFMPEG_PATH
+    with open(CONFIG_PATH, "w", encoding="utf-8") as f:
+        json.dump(config, f, ensure_ascii=False, indent=4)
+    print(f"[INFO] ffmpeg : {FFMPEG_PATH}")
+else:
+    print(f"[WARN] no ffmpeg for trimming: {FFMPEG_PATH}")
 
 # ---------------- 전역 상태 ----------------
 frames = []
@@ -410,7 +426,7 @@ def create_tooltip(widget, text):
 
 def on_patient_process(text):
     """버튼 클릭 시 실행"""
-    root.title("Please Wait ...")
+    root.title("Please Wait 30 secs...")
     result_text = send_to_speech_server2(text)
     if result_text.strip():
         pyperclip.copy(result_text)
