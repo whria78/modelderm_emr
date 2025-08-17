@@ -4,6 +4,7 @@
 - Optional: **FFmpeg** (for audio trimming)
 
 ```bash
+pip install pywin32
 python vv2.py
 ```
 
