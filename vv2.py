@@ -509,7 +509,7 @@ def save_window_position():
 root = tk.Tk()
 root.title("recode & summarize")
 root.attributes("-topmost", True)
-#root.resizable(False, False)
+root.resizable(False, True)
 root.attributes('-toolwindow', True)  # 윈도우 상단 버튼에서 최소/최대 제거
 
 root.geometry("250x250")
@@ -565,7 +565,7 @@ def update_summary_buttons():
             line = trim_special(line)
             if len(line) < 5:continue
             if total_line>=MAX_SUM:continue
-            display = line if len(line) <= 120 else line[:120] + "..."
+            display = line if len(line) <= 20 else line[:20] + "..."
             total_line+=1
             btn = tk.Button(
                 summary_frame,
