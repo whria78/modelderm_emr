@@ -26,7 +26,7 @@ packages = [
     ("sounddevice", None),
     ("pyperclip", None),
     ("requests", None),
-    ("webrtcvad", None),
+    ("pydub", None),
     ("pywin32", None),
     ("pyautogui", None)
 ]
@@ -51,6 +51,7 @@ def list_all_windows():
 for hwnd, title in list_all_windows():
     print(f"HWND: {hwnd}, Title: {title}")
 
+
     
 import os
 import json
@@ -68,9 +69,7 @@ from collections import deque
 from threading import Lock
 
 import tempfile
-import webrtcvad
-import contextlib
-import struct
+from pydub import AudioSegment, utils
 
 import win32gui
 import pyautogui
@@ -166,6 +165,11 @@ PROMPT2 = config.get("PROMPT2", default_config["PROMPT2"])
 LANG = config.get("LANG", default_config["LANG"])
 
 
+if os.path.exists(FFMPEG_PATH):
+    AudioSegment.converter = FFMPEG_PATH
+else:
+    AudioSegment.converter = None  # ffmpeg 없으면 None
+
 # ---------------- 전역 상태 ----------------
 frames = []
 frames_lock = Lock()
@@ -221,40 +225,55 @@ def format_timestamp(seconds: float) -> str:
 
 # ---------------- 서버 통신 ----------------
 
+
 def read_wave(path):
-    with contextlib.closing(wave.open(path, 'rb')) as wf:
+    with wave.open(path, 'rb') as wf:
         sample_rate = wf.getframerate()
         pcm_data = wf.readframes(wf.getnframes())
         return pcm_data, sample_rate, wf.getnchannels(), wf.getsampwidth()
 
 def write_wave(path, pcm_data, sample_rate, n_channels=1, sampwidth=2):
-    with contextlib.closing(wave.open(path, 'wb')) as wf:
+    with wave.open(path, 'wb') as wf:
         wf.setnchannels(n_channels)
         wf.setsampwidth(sampwidth)
         wf.setframerate(sample_rate)
         wf.writeframes(pcm_data)
 
-def vad_trim(wav_path, aggressiveness=2):
-    pcm_data, sample_rate, n_channels, sampwidth = read_wave(wav_path)
-    if n_channels != 1 or sampwidth != 2:
-        raise ValueError("webrtcvad requires mono PCM16 audio")
+def vad_trim(wav_path, threshold_db=-40, min_speech_ms=300):
+    """
+    pydub 기반 VAD
+    threshold_db: 음성으로 간주할 최소 dBFS
+    min_speech_ms: 음성 구간 최소 길이
+    """
+    # ffmpeg 없으면 trim 없이 반환
+    if AudioSegment.converter is None:
+        print("[VAD] ffmpeg 경로가 없어 trim하지 않고 원본 반환")
+        return wav_path
 
-    vad = webrtcvad.Vad(aggressiveness)
-    frame_duration = 30  # ms
-    frame_size = int(sample_rate * frame_duration / 1000) * 2  # 2 bytes per sample
+    audio = AudioSegment.from_wav(wav_path)
 
-    # 프레임 단위로 분할
-    frames = [pcm_data[i:i+frame_size] for i in range(0, len(pcm_data), frame_size)]
-    voiced_frames = [f for f in frames if len(f) == frame_size and vad.is_speech(f, sample_rate)]
+    # pydub의 detect_silence는 AudioSegment 모듈 내 utils
+    from pydub.silence import detect_nonsilent
 
-    if not voiced_frames:
-        return wav_path  # 음성 없는 경우 원본 반환
+    nonsilent_ranges = detect_nonsilent(
+        audio,
+        min_silence_len=min_speech_ms,
+        silence_thresh=threshold_db,
+        seek_step=1
+    )
 
-    trimmed_pcm = b''.join(voiced_frames)
+    if not nonsilent_ranges:
+        return wav_path  # 음성 없는 경우
+
+    voiced_audio = AudioSegment.empty()
+    for start, end in nonsilent_ranges:
+        voiced_audio += audio[start:end]
+
     tmp_fd, tmp_path = tempfile.mkstemp(suffix=".wav")
     os.close(tmp_fd)
-    write_wave(tmp_path, trimmed_pcm, sample_rate, n_channels, sampwidth)
+    voiced_audio.export(tmp_path, format="wav")
     return tmp_path
+
 
 def send_to_whisper_server(wav_path, lang=LANG):
     start_time = time.time()
