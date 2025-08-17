@@ -74,6 +74,8 @@ import win32gui
 import pyautogui
 import re
 
+from pydub import AudioSegment, utils
+
 # ---------------- 윈도우 제어 ----------------
 def find_window(title_substring):
     def enum_handler(hwnd, result):
@@ -164,9 +166,9 @@ PROMPT2 = config.get("PROMPT2", default_config["PROMPT2"])
 LANG = config.get("LANG", default_config["LANG"])
 
 FFMPEG_PATH_EXIST=False
+AudioSegment.converter = None
 if os.path.exists(FFMPEG_PATH): 
     FFMPEG_PATH_EXIST=True
-    from pydub import AudioSegment, utils
     AudioSegment.converter = FFMPEG_PATH
 
 
