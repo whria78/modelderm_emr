@@ -14,7 +14,7 @@ python vv2.py
 Please modify the following parts of the `config.json` generated after running `vv2.py`:
 
 ```
-"LANG": 'en',
+"LANG": "en",
 "PROMPT": 
 "Listen to the dermatology consultation recording and summarize it in 1-4 short lines for charting purposes. Use very brief, single-answer style. For example: '3MA mild itch on back', 'widespread rash of unknown duration', 'r/o shingles', 'medication from another hospital', 'return in 3 days'. :",
 "PROMPT2": 
@@ -22,7 +22,7 @@ Please modify the following parts of the `config.json` generated after running `
 ```
 
 ```
-"LANG": 'es',
+"LANG": "es",
 "PROMPT": 
 "Escucha la grabación de la consulta dermatológica y resume en 1-4 líneas cortas para fines de registro. Usa un estilo muy breve y de respuesta única. Por ejemplo: '3MA picazón leve en la espalda', 'erupción generalizada de duración desconocida', 'r/o herpes zóster', 'medicación de otro hospital', 'volver en 3 días'. :",
 "PROMPT2": 
