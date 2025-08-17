@@ -27,4 +27,13 @@ Please modify the following parts of the `config.json` generated after running `
 "Escucha la grabación de la consulta dermatológica y crea un registro médico. Intenta mantener las frases breves y de respuesta única. Por ejemplo: '3MA picazón leve en la espalda', 'erupción generalizada de duración desconocida', 'r/o herpes zóster', 'medicación de otro hospital', 'volver en 3 días'. Si el paciente presenta varios problemas, sepáralos por cada problema y solo registra los hechos mencionados en la conversación. :"
 ```
 
+## ⚠ Server Availability
+
+The servers are currently publicly accessible but will be closed in the future.  
+To run the servers locally, please refer to the following resources:
+
+- [Whisper](https://github.com/whria78/modelderm_emr/tree/main/server)  
+- [llama.cpp](https://github.com/ggml-org/llama.cpp)  
+
+## Screenshot
 ![Screenshot](screenshot.png)
