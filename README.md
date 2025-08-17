@@ -7,6 +7,8 @@
 pip install pywin32
 python vv2.py
 ```
+![Install](/screenshots/install.png)
+
 
 ## Non-Korean Configuration
 
