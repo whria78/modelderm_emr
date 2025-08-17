@@ -45,3 +45,12 @@ llama-server -m ~/gpt-oss-120b-mxfp4-00001-of-00003.gguf \
   --flash-attn
 ```
 
+## ⚠ Server URL Format
+
+Make sure to use the following format for server URLs (replace IP with `127.0.0.1` if running locally):
+
+```python
+# WHISPER_SERVER_URL = "http://127.0.0.1:12346/api/upload"
+# SPEECH_SERVER_URL = "http://127.0.0.1:13000/v1/chat/completions"  # 20B
+# SPEECH_SERVER_URL = "http://127.0.0.1:13001/v1/chat/completions"  # 120B
+```
