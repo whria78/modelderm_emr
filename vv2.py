@@ -2,7 +2,7 @@ import subprocess
 import sys
 
 def restart_script():
-    print("[알림] 필수 패키지 설치 후 스크립트를 재실행합니다...")
+    print("[NOTICE] Install & Restart...")
     python_exe = sys.executable
     script = sys.argv[0]
     args = sys.argv[1:]
