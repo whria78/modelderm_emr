@@ -5,7 +5,7 @@
 
 ```bash
 python vv2.py
-# Install requirements if an error occurs as followings:
+# Install requirements manually if an error occurs as followings:
 # pip install numpy sounddevice pyperclip requests pydub pyautogui pywin32
 ```
 
@@ -31,14 +31,14 @@ Please modify the following parts of the `config.json` generated after running `
 
 ## ⚠ Server Availability
 
-The servers are currently publicly accessible but will be closed in the future.  
+The servers are currently publicly accessible until 2025-9-30, and will be closed.  
 To run the servers locally, please refer to the following resources:
 
-- [script for the Whisper server - https://github.com/whria78/modelderm_emr/tree/main/server](https://github.com/whria78/modelderm_emr/tree/main/server)  
+- [script for the whisper - https://github.com/whria78/modelderm_emr/tree/main/server](https://github.com/whria78/modelderm_emr/tree/main/server)  
 - [llama-server.exe & cudart-llama-bin-win-cuda-12.4-x64.zip - https://github.com/ggml-org/llama.cpp/releases](https://github.com/ggml-org/llama.cpp/releases)  
 - [cuda12.4 - https://developer.nvidia.com/cuda-12-4-0-download-archive](https://developer.nvidia.com/cuda-12-4-0-download-archive)
-- [120b - https://huggingface.co/ggml-org/gpt-oss-120b-GGUF](https://huggingface.co/ggml-org/gpt-oss-120b-GGUF)
-- [20b - https://huggingface.co/ggml-org/gpt-oss-20b-GGUF](https://huggingface.co/ggml-org/gpt-oss-20b-GGUF)
+- [gpt-oss 120b - https://huggingface.co/ggml-org/gpt-oss-120b-GGUF](https://huggingface.co/ggml-org/gpt-oss-120b-GGUF)
+- [gpt-oss 20b - https://huggingface.co/ggml-org/gpt-oss-20b-GGUF](https://huggingface.co/ggml-org/gpt-oss-20b-GGUF)
 
 ## Screenshot
 ![Screenshot](screenshot.png)
