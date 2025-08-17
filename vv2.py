@@ -519,10 +519,10 @@ def save_window_position():
 root = tk.Tk()
 root.title("recode & summarize")
 root.attributes("-topmost", True)
-root.resizable(False, True)
+root.resizable(True, True)
 root.attributes('-toolwindow', True)  # 윈도우 상단 버튼에서 최소/최대 제거
 
-root.geometry("250x250")
+root.geometry("400x250")
 last_geometry = load_window_position()
 if last_geometry:
     root.geometry(last_geometry)
