@@ -164,12 +164,11 @@ PROMPT2 = config.get("PROMPT2", default_config["PROMPT2"])
 LANG = config.get("LANG", default_config["LANG"])
 
 FFMPEG_PATH_EXIST=False
-if os.path.exists(FFMPEG_PATH): FFMPEG_PATH_EXIST=True
-AudioSegment.converter = None  # ffmpeg 없으면 None
-if FFMPEG_PATH_EXIST: AudioSegment.converter = FFMPEG_PATH
-
-if FFMPEG_PATH_EXIST:
+if os.path.exists(FFMPEG_PATH): 
+    FFMPEG_PATH_EXIST=True
     from pydub import AudioSegment, utils
+    AudioSegment.converter = FFMPEG_PATH
+
 
 # ---------------- 전역 상태 ----------------
 frames = []
