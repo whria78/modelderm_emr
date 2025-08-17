@@ -11,8 +11,7 @@
     "WHISPER_SERVER_URL": "https://t1.modelderm.com/whisper",
     "SPEECH_SERVER_URL": "https://t1.modelderm.com/20b",
     "SPEECH_SERVER2_URL": "https://t1.modelderm.com/120b",
-    
-    "LANG": 'ko',
+    "LANG": "ko",
     "PROMPT": 
     "진료 녹음을 듣고 차팅용으로 1~4줄, 단답식, 매우 짧게 요약. 예를 들면 '3MA 허리의 약한 가려움증','기간을 모르는 전신의 발진', 'r/o 대상포진','타병원에서 약복용', '3일후 다시 내원 필요' 같은 식으로 요약해줘. :"
     ,
