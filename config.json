@@ -4,7 +4,7 @@
     "BLOCK_SEC": 0.1,
     "CHUNK_SEC": 30,
     "CHUNK_RESET_SEC": 10,
-    "LOUD_RMS_THRESHOLD": 0.005,
+    "LOUD_RMS_THRESHOLD": 0.01,
     "LOUD_REQUIRED_SEC": 5.0,
     "RMS_SMOOTHING": 0.9,
     "FFMPEG_PATH": "c:\\ffmpeg\\bin\\ffmpeg.exe",

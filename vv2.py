@@ -565,7 +565,7 @@ def update_summary_buttons():
             line = trim_special(line)
             if len(line) < 5:continue
             if total_line>=MAX_SUM:continue
-            display = line if len(line) <= 20 else line[:20] + "..."
+            display = line if len(line) <= 25 else line[:25] + "..."
             total_line+=1
             btn = tk.Button(
                 summary_frame,
