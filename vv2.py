@@ -289,8 +289,9 @@ def send_to_whisper_server(wav_path, lang=LANG):
             transcript = data.get('transcript') or data.get('text') or ''
         
         elapsed = time.time() - start_time
-        print(f"[Whisper server processing time] {elapsed:.2f}초")
-        os.remove(trimmed_path)
+        print(transcript)
+        print(f"[Whisper server processing time] {elapsed:.2f}secs")
+        if wav_path!=trimmed_path: os.remove(trimmed_path)
         return transcript
 
     except Exception as e:
@@ -306,6 +307,7 @@ def send_to_speech_server2(text):
     return send_to_speech_server_ex(PROMPT2,text,SPEECH_SERVER2_URL)
 
 def send_to_speech_server_ex(PROMPT,text,url):
+    start_time = time.time()
     try:
         payload = {
             "messages": [
@@ -318,6 +320,11 @@ def send_to_speech_server_ex(PROMPT,text,url):
         r.raise_for_status()
         data = r.json()
         response_text = data.get("choices", [{}])[0].get("message", {}).get("content", "")
+
+        elapsed = time.time() - start_time
+        print(response_text)
+        print(f"[GPT server processing time] {elapsed:.2f}secs")
+        
         match = re.search(r"<\|channel\|>final<\|message\|>(.*)", response_text, re.S)
         if match:
             return match.group(1).strip()
