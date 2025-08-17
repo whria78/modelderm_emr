@@ -9,7 +9,7 @@ python vv2.py
 
 ## Non-Korean Configuration
 
-Please modify the following parts of the `config.json`:
+Please modify the following parts of the `config.json` generated after running `vv2.py`:
 
 ```
 "LANG": 'en',
