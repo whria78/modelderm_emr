@@ -8,8 +8,6 @@ python vv2.py
 # Install requirements if an error occurs as followings:
 # pip install numpy sounddevice pyperclip requests pydub pyautogui pywin32
 ```
-![Install](screenshots/install.PNG)
-
 
 ## Non-Korean Configuration
 
