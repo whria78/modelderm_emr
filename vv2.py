@@ -33,7 +33,7 @@ packages = [
 ]
 
 for pkg, name in packages:
-    install_and_import(pkg, name)
+    install_and_restart_if_needed(pkg, name)
 
 
 import win32gui
