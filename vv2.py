@@ -1,3 +1,31 @@
+import subprocess
+import sys
+
+# ---------------- 자동 라이브러리 설치 ----------------
+def install_and_import(package, import_name=None):
+    import_name = import_name or package
+    try:
+        __import__(import_name)
+    except ImportError:
+        print(f"[설치 중] {package} ...")
+        subprocess.check_call([sys.executable, "-m", "pip", "install", package])
+    finally:
+        globals()[import_name] = __import__(import_name)
+
+# 필수 패키지 리스트
+packages = [
+    ("numpy", None),
+    ("sounddevice", "sd"),
+    ("pyperclip", None),
+    ("requests", None),
+    ("webrtcvad", None),
+    ("pywin32", "win32gui"),
+    ("pyautogui", None)
+]
+
+for pkg, name in packages:
+    install_and_import(pkg, name)
+    
 import os
 import json
 import tkinter as tk
